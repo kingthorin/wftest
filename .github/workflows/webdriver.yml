@@ -32,7 +32,7 @@ jobs:
         git remote add origin https://github.com/$GITHUB_USER/zap-extensions.git
         # Setup env vars for later
         BRANCH="webdriver-update"
-        export GITHUB_TOKEN=${{ secrets.ZAPBOT_TOKEN }}
+        export GITHUB_TOKEN=${{ secrets.TEST_TOKEN }}
         if [ "${{ github.event.inputs.chrome_version }}" == "cxx" ]; then
           CHROME_VERS=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
         else
@@ -45,8 +45,7 @@ jobs:
         fi
         # Build the feature branch
         git checkout -b $BRANCH
-        # git remote set-url origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/$GITHUB_USER/zap-extensions.git
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_USER/zap-extensions.git
+        git remote set-url origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/$GITHUB_USER/zap-extensions.git
         # Update ChromeDriver version strings in help and build file
         sed -i -e 's|val chromeDriverVersion = "[0-9\.]*"|val chromeDriverVersion = "'"$CHROME_VERS"'"|g' addOns/webdrivers/webdrivers.gradle.kts
         sed -i -e "s|Chrome - ChromeDriver [0-9\.]*</li>|Chrome - ChromeDriver $CHROME_VERS</li>|g" addOns/webdrivers/webdriverlinux/src/main/javahelp/org/zaproxy/zap/extension/webdriverlinux/resources/help/contents/webdriverlinux.html

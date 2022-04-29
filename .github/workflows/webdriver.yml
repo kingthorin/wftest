@@ -56,7 +56,7 @@ jobs:
         git update-index -q --refresh
         # If there are changes update changelog, and commit
         if ! git diff-index --quiet HEAD --; then
-          IS_UPDT=1
+         IS_UPDT=1
          ./gradlew :addOn:webdrivers:webdriverlinux:updateChangelog --change="- Update ChromeDriver to $CHROME_VERS."
          ./gradlew :addOn:webdrivers:webdrivermacos:updateChangelog --change="- Update ChromeDriver to $CHROME_VERS."
          ./gradlew :addOn:webdrivers:webdriverwindows:updateChangelog --change="- Update ChromeDriver to $CHROME_VERS."

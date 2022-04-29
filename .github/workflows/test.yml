@@ -16,7 +16,8 @@ jobs:
     steps:
     - name: Build Feature Branch and Raise PR
       run: |
-        CHROME_INPUT=${{ github.event.inputs.chrome_version }}
+        CHROME_INPUT="${{ github.event.inputs.chrome_version }}"
+        echo $CHROME_INPUT
         CHROME_INPUT=${$CHROME_INPUT:-"cxx"}
         echo $CHROME_INPUT
         if [ $CHROME_INPUT == "cxx" ]; then

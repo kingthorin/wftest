@@ -55,6 +55,7 @@ jobs:
         sed -i -e "s|Chrome - ChromeDriver [0-9\.]*</li>|Chrome - ChromeDriver $CHROME_VERS</li>|g" addOns/webdrivers/webdriverwindows/src/main/javahelp/org/zaproxy/zap/extension/webdriverwindows/resources/help/contents/webdriverwindows.html
         git update-index -q --refresh
         # If there are changes update changelog, and commit
+        IS_UPDT=0
         if ! git diff-index --quiet HEAD --; then
          IS_UPDT=1
          ./gradlew :addOn:webdrivers:webdriverlinux:updateChangelog --change="- Update ChromeDriver to $CHROME_VERS."

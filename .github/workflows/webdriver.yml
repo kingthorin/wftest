@@ -44,7 +44,7 @@ jobs:
         else
           GECKO_VERS=${{ github.event.inputs.gecko_version }}
         fi
-        echo GECKO_VERS
+        echo $GECKO_VERS
         # Build the feature branch
         git checkout -b $BRANCH
         git remote set-url origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/$GITHUB_USER/zap-extensions.git

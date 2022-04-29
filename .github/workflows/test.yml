@@ -17,7 +17,8 @@ jobs:
     steps:
     - name: Build Feature Branch and Raise PR
       run: |
-        CHROME_INTPUT=${"${{ github.event.inputs.chrome_version }}":-"cxx"}
+        CHROME_INTPUT=${{ github.event.inputs.chrome_version }}
+        CHROME_INPUT=${$CHROME_INPUT:-"cxx"}
         if [ "$CHROME_INPUT" == "cxx" ]; then
           CHROME_VERS=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
         else

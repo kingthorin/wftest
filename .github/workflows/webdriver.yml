@@ -2,7 +2,7 @@ name: Create Webdriver Update PR
 
 on:
   schedule:
-    - cron:  '0 3 * * *'
+    - cron:  '45 11 * * *'
   workflow_dispatch:
     inputs:
       chrome_version:
@@ -38,11 +38,13 @@ jobs:
         else
           CHROME_VERS=${{ github.event.inputs.chrome_version }}
         fi
+        echo $CHROME_VERS
         if [ "${{ github.event.inputs.gecko_version }}" == "gxx" ]; then
           GECKO_VERS=$(curl -s https://api.github.com/repos/mozilla/geckodriver/releases/latest|jq -r .name)
         else
           GECKO_VERS=${{ github.event.inputs.gecko_version }}
         fi
+        echo GECKO_VERS
         # Build the feature branch
         git checkout -b $BRANCH
         git remote set-url origin https://$GITHUB_USER:$GITHUB_TOKEN@github.com/$GITHUB_USER/zap-extensions.git
@@ -80,5 +82,6 @@ jobs:
         if [ $IS_UPDT -eq 1 ]; then
           git push --set-upstream origin $BRANCH --force
           # Open the PR
-          hub pull-request --no-edit
+          echo "Would open PR"
+          # hub pull-request --no-edit
         fi

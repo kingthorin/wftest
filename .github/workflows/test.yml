@@ -26,3 +26,6 @@ jobs:
           CHROME_VERS=${{ github.event.inputs.chrome_version }}
         fi
         echo $CHROME_VERS
+        if [ ${{ github.event_name }} != 'schedule' ]; then
+          echo "FREDFRED"
+        fi

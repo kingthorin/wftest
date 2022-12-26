@@ -27,7 +27,7 @@ jobs:
         fi
         echo $CHROME_VERS
         if [ "$CHROME_VERS" == "null" ]; then
-          exit 1
+          exit
         fi
         if [ ${{ github.event_name }} != 'schedule' ]; then
           echo "FREDFRED"

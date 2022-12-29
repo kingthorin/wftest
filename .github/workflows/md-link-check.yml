@@ -75,7 +75,7 @@ jobs:
           return fs.readFileSync(brokenLinksPath).toString().trimEnd();
     - name: Comment
       if: ${{ failure() && github.event_name == 'pull_request_target' }}
-      uses: ./.github/workflows/comment.yml
+      uses: ./.github/workflows/comment.yml@main
       with:
         comment: "${{ steps.broken-links.outputs.result }}"
         pr_id: ${{ github.event.number }}

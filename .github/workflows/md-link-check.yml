@@ -72,7 +72,8 @@ jobs:
         script: |
           const fs = require("fs");
           const brokenLinksPath = `${process.env.GITHUB_WORKSPACE}/brokenlinks.txt`;
-          return fs.readFileSync(brokenLinksPath).toString().trimEnd();
+          const brokenLinksString = fs.readFileSync(brokenLinksPath).toString().trimEnd();
+          return brokenLinksString;
     - name: Comment
       if: ${{ failure() && github.event_name == 'pull_request_target' }}
       uses: ./.github/workflows/comment.yml@main

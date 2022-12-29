@@ -1,0 +1,26 @@
+on:
+  workflow_call:
+    inputs:
+      comment:
+        required: true
+        type: string
+      pr_id:
+        requited: true
+        type: string
+
+name: Comment
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cmment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: ${{ inputs.pr_id }},
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `**The following links are broken:** \n${{ inputs.comment }}`
+          })

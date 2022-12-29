@@ -1,0 +1,34 @@
+name: Null Test
+
+on:
+  schedule:
+    - cron:  '45 11 * * *'
+  workflow_dispatch:
+    inputs:
+      chrome_version:
+        description: 'ChromeDriver version?'
+        default: 'cxx'
+
+jobs:
+  create_pr:
+    name: Create Pull Request
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build Feature Branch and Raise PR
+      run: |
+        CHROME_INPUT="${{ github.event.inputs.chrome_version }}"
+        echo $CHROME_INPUT
+        CHROME_INPUT=${CHROME_INPUT:-"cxx" }
+        echo $CHROME_INPUT
+        if [ $CHROME_INPUT == "cxx" ]; then
+          CHROME_VERS=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+        else
+          CHROME_VERS=${{ github.event.inputs.chrome_version }}
+        fi
+        echo $CHROME_VERS
+        if [ "$CHROME_VERS" == "null" ]; then
+          exit
+        fi
+        if [ ${{ github.event_name }} != 'schedule' ]; then
+          echo "FREDFRED"
+        fi

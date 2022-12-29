@@ -68,7 +68,7 @@ jobs:
       if: ${{ failure() && github.event_name == 'pull_request_target' }}
       uses: actions/github-script@v6
       with:
-        # github-token: ${{secrets.GITHUB_TOKEN}}
+        github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           const fs = require("fs");
           const brokenLinksPath = `${process.env.GITHUB_WORKSPACE}/brokenlinks.txt`;

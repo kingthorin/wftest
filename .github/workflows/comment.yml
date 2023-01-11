@@ -27,7 +27,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const fs = require("fs");
-            const brokenLinksPath = `${process.env.GITHUB_WORKSPACE}/brokenlinks.txt`;
+            const brokenLinksPath = `./brokenlinks.txt`;
             const brokenLinksString = fs.readFileSync(brokenLinksPath).toString().trimEnd();
             return brokenLinksString;
       - name: Comment

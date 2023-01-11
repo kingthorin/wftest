@@ -1,11 +1,11 @@
 on:
   workflow_call:
     inputs:
-      comment:
+      input:
         required: true
         type: string
       pr_id:
-        requited: true
+        required: true
         type: string
 
 name: Comment
@@ -13,16 +13,29 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Download Result
+        uses: actions/download-artifact@v3
+        with:
+          name: broken-links
+      - name: Set Broken Links
+        id: broken_links
+        if: ${{ failure() && github.event_name == 'pull_request_target' }}
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require("fs");
+            const brokenLinksPath = `${process.env.GITHUB_WORKSPACE}/brokenlinks.txt`;
+            const brokenLinksString = fs.readFileSync(brokenLinksPath).toString().trimEnd();
+            return brokenLinksString;
       - name: Comment
         uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          github.rest.issues.createComment({
-            issue_number: ${{ inputs.pr_id }},
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: `**The following links are broken:** \n${{ inputs.comment }}`
-          })
+          script: |
+            github.rest.issues.createComment({
+              issue_number: ${{ inputs.pr_id }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `**The following links are broken:** \n${{ steps.broken_links.outputs.result }}`
+            })

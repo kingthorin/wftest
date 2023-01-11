@@ -77,7 +77,7 @@ jobs:
           return brokenLinksString;
     - name: Comment
       if: ${{ failure() && github.event_name == 'pull_request_target' }}
-      uses: ./.github/workflows/comment.yml@main
+      uses: kingthorin/wftest/.github/workflows/comment.yml@main
       with:
         comment: "${{ steps.broken_links.outputs.result }}"
         pr_id: ${{ github.event.number }}

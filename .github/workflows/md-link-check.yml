@@ -71,4 +71,4 @@ jobs:
     if: ${{ failure() && github.event_name == 'pull_request_target' }}
     with:
       pr_id: ${{ github.event.number }}
-      input: broken-links
+      input: 'Fred'

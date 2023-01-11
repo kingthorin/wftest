@@ -42,7 +42,7 @@ jobs:
         echo $FILES
         touch log err
         ls -lah
-        for FILE in $FILES; do echo $FILE | grep -q .*\.md\$ && markdown-link-check -q -v -c .github/configs/markdown-link-check-config.json $FILE 1>> log 2>> err; done
+        for FILE in $FILES; do echo $FILE | grep -q .*\.md\$ && markdown-link-check -q -v -c .github/workflows/configs/markdown-link-check-config.json $FILE 1>> log 2>> err; done
         if grep -q  "ERROR:" err ; then exit 1 ; else echo -e "No broken links found."; fi
         ls -lah
         echo $(cat log)

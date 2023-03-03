@@ -12,7 +12,7 @@ runs:
   steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Run Comment Linting Issues Action
+    - name: Run Comment Action
       run: |
         export GITHUB_TOKEN=$ACTIONS_RUNTIME_TOKEN
         export GITHUB_REPOSITORY=$GITHUB_REPOSITORY
@@ -21,6 +21,6 @@ runs:
         export GITHUB_REF=$GITHUB_REF
         export GITHUB_EVENT_PATH=$GITHUB_EVENT_PATH
         export GITHUB_WORKSPACE=$GITHUB_WORKSPACE
-        sh -c "cd $GITHUB_WORKSPACE && node .github/actions/comment-lint-issues/comment-lint-issues.js ${{inputs.pull_request_number}}"
+        sh -c "cd $GITHUB_WORKSPACE && node .github/actions/comment-lint-issues/comment.js ${{inputs.pull_request_number}}"
   env:
     GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

@@ -70,11 +70,8 @@ jobs:
       with:
         name: broken-links
         path: brokenlinks.txt
-
-  comment:
-    needs: link-check
-    uses: kingthorin/wftest/.github/workflows/comment.yml@main
-    if: ${{ failure() && github.event_name == 'pull_request_target' }}
-    with:
-      pr_id: ${{ github.event.number }}
-      input: ${{ needs.link-check.outputs.output1 }}
+    - name: Comment Linting Issues
+      if: failure()
+      uses: ./.github/actions/comment-lint-issues
+      with:
+        pull_request_number: ${{ github.event.number }}

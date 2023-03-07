@@ -70,10 +70,3 @@ jobs:
       with:
         name: broken-links
         path: brokenlinks.txt
-    - name: Comment Linting Issues
-      if: failure()
-      uses: ./.github/actions/comment-pr
-      with:
-        message: |
-          **The following issues were identified:**
-          $(cat brokenlinks.txt)

@@ -4,22 +4,29 @@
 
 name: Comment on Pull Request
 
+description: |
+  This action comments on a pull request with a given message.
+
 inputs:
   message:
     description: 'The message to post as a comment.'
     required: true
 
 runs:
-  using: 'node16'
-  steps:
-    - name: Comment on Pull Request
-      uses: actions/github-script@v6
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          github.issues.createComment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: context.payload.pull_request.number,
-            body: '${{ inputs.message }}'
-          });
+  using: 'github-script'
+  with:
+    github-token: ${{ secrets.GITHUB_TOKEN }}
+    script: |
+      const message = '${{ inputs.message }}';
+      const octokit = new Octokit();
+      const { data: pullRequest } = await octokit.rest.pulls.get({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        pull_number: context.payload.pull_request.number
+      });
+      await octokit.rest.issues.createComment({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: pullRequest.number,
+        body: message
+      });

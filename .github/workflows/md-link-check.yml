@@ -72,6 +72,8 @@ jobs:
         path: brokenlinks.txt
     - name: Comment Linting Issues
       if: failure()
-      uses: ./.github/actions/comment
-      with:
-        pull_request_number: ${{ github.event.number }}
+        uses: ./.github/workflows/comment-pr.yml
+        with:
+          message: |
+            **The following issues were identified:**
+            $(cat brokenlinks.txt)

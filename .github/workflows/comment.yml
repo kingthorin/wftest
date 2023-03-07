@@ -23,11 +23,8 @@ jobs:
       - name: Comment Linting Issues
         uses: actions/github-script@v6
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |  using: 'github-script'
-  with:
-    github-token: ${{ secrets.GITHUB_TOKEN }}
-    script: |
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
             const fs = require("fs");
             const lintPath = `${process.env.GITHUB_WORKSPACE}/brokenlinks.txt`;
             const lintString = fs.readFileSync(lintPath).toString().trimEnd();

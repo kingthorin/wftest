@@ -24,12 +24,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
+          script: |  using: 'github-script'
+  with:
+    github-token: ${{ secrets.GITHUB_TOKEN }}
+    script: |
             const fs = require("fs");
             const lintPath = `${process.env.GITHUB_WORKSPACE}/brokenlinks.txt`;
             const lintString = fs.readFileSync(lintPath).toString().trimEnd();
             github.rest.issues.createComment({
-              issue_number: ${{ github.event.workflow_run.head_commit.message.match(/(?<=\#)\d+(?=\s)/g)[0] }},
+              issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `**The following issues were identified:** \n${lintString}`

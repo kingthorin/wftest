@@ -33,6 +33,7 @@ jobs:
       uses: umani/changed-files@0239328a3a6268aad16af7c3e4efc78e32d6c0f0
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
+        pattern: '^.*\.md$'
     - name: PR link check
       if: github.event_name == 'pull_request_target'
       env:
@@ -42,7 +43,8 @@ jobs:
         echo $FILES
         echo $(which touch)
         touch log err
-        for FILE in $FILES; do echo "File: " $FILE | grep -q .*\.md\$ && markdown-link-check -q -v -c .github/configs/markdown-link-check-config.json $FILE 1>> log 2>> err; done
+        echo $(ls -l)
+        for FILE in $FILES; do echo "File: " $FILE | markdown-link-check -q -v -c .github/configs/markdown-link-check-config.json $FILE 1>> log 2>> err; done
         if grep -q  "ERROR:" err ; then exit 1 ; else echo -e "No broken links found."; fi
         echo "Log: " $(cat log)
         echo "Err: " $(cat err)

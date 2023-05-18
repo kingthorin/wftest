@@ -45,9 +45,9 @@ jobs:
         touch log err
         echo $(ls -l)
         for FILE in $FILES; do echo "File: " $FILE | markdown-link-check -q -v -c .github/configs/markdown-link-check-config.json $FILE 1>> log 2>> err; done
-        if grep -q  "ERROR:" err ; then exit 1 ; else echo -e "No broken links found."; fi
         echo "Log: " $(cat log)
         echo "Err: " $(cat err)
+        if grep -q  "ERROR:" err ; then exit 1 ; else echo -e "No broken links found."; fi
     - name: Repository link check
       if: github.event_name == 'workflow_dispatch'
       run: |

@@ -1,3 +1,3 @@
 # wftest
 
-[Somelink](https://brokenlink.zip/test)
+[Somelink](https://bell.ca)

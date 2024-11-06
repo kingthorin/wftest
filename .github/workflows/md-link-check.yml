@@ -66,7 +66,7 @@ jobs:
         rm -f err log
     - name: Upload list of broken links
       if: failure()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: broken-links
         path: brokenlinks.txt

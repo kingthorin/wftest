@@ -27,7 +27,7 @@ var pw = new PrintWriter(fw);
 pw.println("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
 pw.println("<configuration>");
 pw.println("    <policy>Sequence</policy>");
-pw.println("    <scanner>">);
+pw.println("    <scanner>");
 pw.println("        <level>OFF</level>");
 pw.println("        <strength>MEDIUM</strength>");
 pw.println("    </scanner>");

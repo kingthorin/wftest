@@ -28,4 +28,4 @@ jobs:
         name: list
         path: list.txt
     - name: Summary
-      run: list.txt >> $GITHUB_STEP_SUMMARY
+      run: cat list.txt >> $GITHUB_STEP_SUMMARY

@@ -15,7 +15,6 @@ jobs:
         pwd
         ls
         ls -al ./zap-admin/scripts
-        ls -al ./zap-admin/wftest/scripts
     - name: Create list
       run: |
         # Run the ZAP script

@@ -42,8 +42,9 @@ jobs:
         BRANCH=scan-policies-updt
         mkdir backup
         pwd
-        ls -al 'zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default policy.policy'
+        ls
         ls -al zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies
+        ls -al 'zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default policy.policy'
         cp 'zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default policy.policy' ./backup/.
         cd zap-extensions
         SRC_BASE="kingthorin/zap-extensions@"$(git log -1 --format=format:%h)

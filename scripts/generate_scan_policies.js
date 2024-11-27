@@ -36,5 +36,5 @@ for (var i = 0; i < plugins.length; i++) {
   } catch (e) {
     print(e);
   }
-  pw.close();
 }
+pw.close();

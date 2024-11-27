@@ -41,11 +41,7 @@ jobs:
         git config --global user.name $GITHUB_USER
         BRANCH=scan-policies-updt
         mkdir backup
-        pwd
-        ls
-        ls -al zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies
-        ls -al 'zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default policy.policy'
-        cp 'zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default policy.policy' ./backup/.
+        cp 'zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default Policy.policy' ./backup/.
         cd zap-extensions
         SRC_BASE="kingthorin/zap-extensions@"$(git log -1 --format=format:%h)
         git checkout -b $BRANCH

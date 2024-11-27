@@ -10,22 +10,16 @@ jobs:
       uses: actions/checkout@v4
       with:
         path: zap-admin
-    - name: Debug
-      run: |
-        pwd
-        ls
-        ls -al ./zap-admin/scripts
     - name: Create list
       run: |
         # Run the ZAP script
         docker run -v $(pwd):/zap/wrk/:rw --user root -t ghcr.io/zaproxy/zaproxy:nightly ./zap.sh -addoninstall soap -addoninstall ascanrulesAlpha -silent -script /zap/wrk/zap-admin/scripts/generate_scan_policies.js -cmd
-        ls
-        ls -al ./zap-admin
-        ls -al ./zap-admin/scripts
     - name: Attach list
       uses: actions/upload-artifact@v4
       with:
         name: list
         path: list.txt
     - name: Summary
-      run: cat list.txt >> $GITHUB_STEP_SUMMARY
+      run: |
+        cat list.txt >> $GITHUB_STEP_SUMMARY
+        echo $GITHUB_STEP_SUMMARY

@@ -20,8 +20,10 @@ jobs:
       run: |
         # Run the ZAP script
         docker run -v $(pwd):/zap/wrk/:rw --user root -t ghcr.io/zaproxy/zaproxy:nightly ./zap.sh -addoninstall soap -addoninstall ascanrulesAlpha -silent -script /zap/wrk/zap-admin/scripts/generate_scan_policies.js -cmd
-    - name: Upload list of broken links
+    - name: Attach list
       uses: actions/upload-artifact@v4
       with:
         name: list
         path: /zap/wrk/zap-admin/scripts/list.txt
+    - name: Summary
+      run: cat list.txt >> $GITHUB_STEP_SUMMARY

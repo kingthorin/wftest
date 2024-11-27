@@ -10,12 +10,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         path: zap-admin
-    - name: Checkout zaproxy-website
-      uses: actions/checkout@v4
-      with:
-        repository: zaproxy/zap-extensions
-        persist-credentials: false
-        fetch-depth: 0
+    - name: Debug
+      run: pwd && ls
     - name: Create list
       run: |
         # Run the ZAP script

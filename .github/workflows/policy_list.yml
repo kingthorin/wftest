@@ -24,6 +24,6 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: list
-        path: /zap/wrk/zap-admin/scripts/list.txt
+        path: list.txt
     - name: Summary
       run: cat list.txt >> $GITHUB_STEP_SUMMARY

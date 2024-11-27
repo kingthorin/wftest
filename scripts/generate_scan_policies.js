@@ -3,7 +3,7 @@
 // The policies are created after starting a ZAP weekly release with the '-addoninstallall' option.
 
 // Change the DIR below to match the local directory containing the alert files
-var POLICY_FILE = "/zap/wrk/API.policy";
+var POLICY_FILE = "/zap/wrk/zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/API.policy";
 
 var FileWriter = Java.type('java.io.FileWriter');
 var PrintWriter = Java.type('java.io.PrintWriter');

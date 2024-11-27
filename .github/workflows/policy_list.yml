@@ -40,9 +40,9 @@ jobs:
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name $GITHUB_USER
         BRANCH=scan-policies-updt
-        # Run the ZAP script
-        docker run -v $(pwd):/zap/wrk/:rw --user root -t ghcr.io/zaproxy/zaproxy:nightly ./zap.sh -addoninstallall -silent -script /zap/wrk/zap-admin/scripts/generate_alert_pages.js -cmd
         mkdir backup
+        pwd
+        ls
         cp "zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default policy.policy" ./backup/.
         cd zap-extensions
         SRC_BASE="kingthorin/zap-extensions@"$(git log -1 --format=format:%h)

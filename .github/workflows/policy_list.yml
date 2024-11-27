@@ -1,0 +1,28 @@
+name: Generate plugin ID list from Policy tags
+on: 
+  workflow_dispatch:
+
+jobs:
+  update-alerts:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        path: zap-admin
+    - name: Checkout zaproxy-website
+      uses: actions/checkout@v4
+      with:
+        repository: zaproxy/zap-extensions
+        persist-credentials: false
+        fetch-depth: 0
+    - name: Create list
+      run: |
+        # Run the ZAP script
+        docker run -v $(pwd):/zap/wrk/:rw --user root -t ghcr.io/zaproxy/zaproxy:nightly ./zap.sh -addoninstall soap -addoninstall ascanrulesAlpha -silent -script /zap/wrk/zap-admin/scripts/generate_scan_policies.js -cmd
+    - name: Upload list of broken links
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: list
+        path: /zap/wrk/zap-admin/scripts/list.txt

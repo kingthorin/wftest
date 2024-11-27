@@ -50,7 +50,9 @@ jobs:
         rm ./addOns/scanpolicies/src/main/zapHomeFiles/policies/*.policy
         echo "List base backup again"
         ls $BASE/backup/
-        cp '$BASE/backup/Default Policy.policy' ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
+        echo "List base backup Default policy"
+        ls -alh "$BASE/backup/Default Policy.policy"
+        cp "$BASE/backup/Default Policy.policy" ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
         cp $BASE/zap-admin/*.policy ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
         # Update the index to be sure git is aware of changes
         git update-index -q --refresh

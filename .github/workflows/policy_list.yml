@@ -21,5 +21,6 @@ jobs:
         path: list.txt
     - name: Summary
       run: |
+        cat list.txt
         cat list.txt >> $GITHUB_STEP_SUMMARY
         echo $GITHUB_STEP_SUMMARY

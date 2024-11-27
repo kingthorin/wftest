@@ -43,7 +43,7 @@ jobs:
         cd zap-extensions
         SRC_BASE="kingthorin/zap-extensions@"$(git log -1 --format=format:%h)
         git checkout -b $BRANCH
-        cp --u $BASE/*.policy ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
+        cp --update $BASE/*.policy ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
         # Update the index to be sure git is aware of changes
         git update-index -q --refresh
         git add ./addOns/scanpolicies/src/main/zapHomeFiles/policies/

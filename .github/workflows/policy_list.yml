@@ -41,18 +41,12 @@ jobs:
         git config --global user.name $GITHUB_USER
         BRANCH=scan-policies-updt
         mkdir $BASE/backup/
-        echo "List here"
-        ls
-        echo "List base backup"
-        ls $BASE/backup/
         cp 'zap-extensions/addOns/scanpolicies/src/main/zapHomeFiles/policies/Default Policy.policy' $BASE/backup/
-        echo "List base backup again"
-        ls $BASE/backup/
         cd zap-extensions
         SRC_BASE="kingthorin/zap-extensions@"$(git log -1 --format=format:%h)
         git checkout -b $BRANCH
         rm ./addOns/scanpolicies/src/main/zapHomeFiles/policies/*.policy
-        cp '$BASE/backup/Default policy.policy' ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
+        cp '$BASE/backup/Default Policy.policy' ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
         cp $BASE/zap-admin/*.policy ./addOns/scanpolicies/src/main/zapHomeFiles/policies/
         # Update the index to be sure git is aware of changes
         git update-index -q --refresh

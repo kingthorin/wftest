@@ -7,10 +7,6 @@ on:
         description: 'Triggering PR #'
         required: true
         type: number
-    outputs:
-      comment: 
-        description: 'Triggering PR #'
-        value: ${{ steps.comment.pr }}
 
 jobs:
   greet:

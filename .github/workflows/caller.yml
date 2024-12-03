@@ -1,4 +1,4 @@
-# .github/workflows/calling_workflow.yml
+# .github/workflows/caller.yml
 name: Calling Workflow
 
 on:
@@ -8,7 +8,7 @@ on:
     - '!.github/**'
 
 jobs:
-  useCallable:
-    uses: ./.github/workflows/callable.yml
+  CallCommenter:
+    uses: ./.github/workflows/comment.yml
     with:
       pr_id: ${{ github.event.number }}

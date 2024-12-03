@@ -1,0 +1,14 @@
+# .github/workflows/calling_workflow.yml
+name: Calling Workflow
+
+on:
+  pull_request_target:
+    paths:
+    - '**.md'
+    - '!.github/**'
+
+jobs:
+  useCallable:
+    uses: ./.github/workflows/callable.yml
+    with:
+      pr_id: ${{ github.event.number }}

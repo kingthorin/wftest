@@ -1,0 +1,20 @@
+name: Callable Workflow
+
+on: 
+  workflow_call:
+    inputs:
+      pr_id: 
+        description: 'Triggering PR #'
+        required: true
+        type: number
+    outputs:
+      comment: 
+        description: 'Triggering PR #'
+        value: ${{ steps.comment.pr }}
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+    - id: greeting
+      run: echo "Triggering PR # ${{ inputs.pr_id }}" >> $GITHUB_STEP_SUMMARY

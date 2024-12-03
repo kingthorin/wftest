@@ -9,6 +9,6 @@ on:
 
 jobs:
   CallCommenter:
-    uses: ./.github/workflows/comment.yml
+    uses: ./.github/workflows/comment2.yml
     with:
       pr_id: ${{ github.event.number }}

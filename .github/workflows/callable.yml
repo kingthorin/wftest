@@ -14,3 +14,15 @@ jobs:
     steps:
     - id: greeting
       run: echo "Triggering PR number ${{ inputs.pr_id }}" >> $GITHUB_STEP_SUMMARY
+    - name: Comment
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const lintString = "fred ${{ inputs.pr_id }}"
+          github.rest.issues.createComment({
+            issue_number: ${{ inputs.pr_id }},
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: `**The following issues were identified:** \n${lintString}`
+          })
